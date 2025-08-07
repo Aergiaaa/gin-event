@@ -1,0 +1,8 @@
+.env
+.air.toml
+*.db
+*.sql
+tmp/
+
+!go*
+
