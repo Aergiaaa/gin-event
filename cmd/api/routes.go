@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"net/http"
 	"time"
 
@@ -55,7 +56,8 @@ func (app *app) routes() http.Handler {
 				return
 			}
 			ginSwagger.WrapHandler(swaggerFiles.Handler,
-				ginSwagger.URL("http://localhost:8080/swagger/doc.json"))(c)
+				ginSwagger.URL(fmt.Sprintf("http://%s:%d/swagger/doc.json",
+					app.host, app.port)))(c)
 		})
 	}
 

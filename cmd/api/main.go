@@ -21,6 +21,7 @@ import (
 // @description enter your bearer token in the format **Bearer &lt;token&gt;**
 
 type app struct {
+	host      string
 	port      int
 	jwtSecret string
 	models    database.Models
@@ -40,6 +41,7 @@ func main() {
 
 	models := database.NewModels(db)
 	app := &app{
+		host:      env.GetEnvString("HOST", "localhost"),
 		port:      env.GetEnvInt("PORT", 8080),
 		jwtSecret: env.GetEnvString("JWT_SECRET", "secret-123456"),
 		models:    models,
