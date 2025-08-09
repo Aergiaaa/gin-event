@@ -3,6 +3,7 @@
 *.db
 data.sql
 tmp/
+build
 
 !go*
 
