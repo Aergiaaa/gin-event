@@ -7,6 +7,7 @@ import (
 	_ "github.com/Aergiaaa/gin-event/docs"
 	"github.com/Aergiaaa/gin-event/internal/database"
 	"github.com/Aergiaaa/gin-event/internal/env"
+	"github.com/joho/godotenv"
 
 	_ "github.com/mattn/go-sqlite3"
 )
@@ -26,6 +27,11 @@ type app struct {
 }
 
 func main() {
+	err := godotenv.Load()
+	if err != nil {
+		log.Println("No .env file found, using default environment variables")
+	}
+
 	db, err := sql.Open("sqlite3", "./data.db")
 	if err != nil {
 		log.Fatalf("error opening database: %v", err)

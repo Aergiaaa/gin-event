@@ -39,6 +39,8 @@ require (
 	github.com/swaggo/swag v1.16.6
 )
 
+require github.com/joho/godotenv v1.5.1
+
 require (
 	github.com/KyleBanks/depth v1.2.1 // indirect
 	github.com/gin-contrib/cors v1.7.6

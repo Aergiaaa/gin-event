@@ -1,23 +1,34 @@
 package env
 
 import (
+	"log"
 	"os"
 	"strconv"
 )
 
-func GetEnvString(key, defaultValue string) string {
-	if value, exists := os.LookupEnv(key); exists {
-		return value
-	}
-
-	return defaultValue
-}
 func GetEnvInt(key string, defaultValue int) int {
-	if value, exists := os.LookupEnv(key); exists {
-		if intValue, err := strconv.Atoi(value); err == nil {
-			return intValue
-		}
+	envStr, ok := os.LookupEnv("PORT")
+	if !ok {
+		log.Printf("Environment variable %s not set, using default value: %d", key, defaultValue)
+		return defaultValue
+	}
+	envInt, err := strconv.Atoi(envStr)
+	if err != nil {
+		log.Printf(
+			"Error converting environment variable %s to int: %v, using default value: %d",
+			key, err, defaultValue)
+		return defaultValue
 	}
 
-	return defaultValue
+	return envInt
+}
+
+func GetEnvString(key, defaultValue string) string {
+	env, ok := os.LookupEnv("JWT_SECRET")
+	if !ok {
+		log.Printf("Environment variable %s not set, using default value: %s", key, defaultValue)
+		return defaultValue
+	}
+
+	return env
 }
